@@ -33,7 +33,7 @@ userSchema.methods.isValidPassword = async function (password) {
 // Add a method to generate JWT
 userSchema.methods.generateJWT = function () {
   return jwt.sign({ email: this.email }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
+    expiresIn: "24h",
   });
 };
 
