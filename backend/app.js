@@ -3,6 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import connect from "./db/db.js";
 import userRoutes from "./routes/user.routes.js";
+import cookieParser from "cookie-parser";
 
 // Start DB connection with error handling
 const startServer = async () => {
@@ -24,6 +25,7 @@ app.use(morgan("dev"));
 app.use(cors()); // Enable CORS
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Routes
 app.use("/users", userRoutes);
