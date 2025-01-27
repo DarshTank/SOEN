@@ -4,6 +4,7 @@ import cors from "cors";
 import connect from "./db/db.js";
 import userRoutes from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
+// import cors from "cors";
 
 // Start DB connection with error handling
 const startServer = async () => {

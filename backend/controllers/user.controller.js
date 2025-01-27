@@ -17,6 +17,8 @@ export const createUserController = async (req, res) => {
 
     const token = user.generateJWT(); // Fixed: `generateJWT` is called on the `user` instance, not `await`
 
+    delete user._doc.password; // Remove password from the response
+
     res.status(201).json({ user, token });
   } catch (error) {
     res.status(400).json({ message: error.message });

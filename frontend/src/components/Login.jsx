@@ -1,17 +1,36 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "../config/axios.js";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  function submitHandler(e) {
+    axios
+      .post("/login", { email, password })
+      .then((res) => {
+        console.log(res.data);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <div className="flex items-center justify-center h-full w-full">
       <div className="w-full max-w-md p-8 space-y-6 bg-gray-800 text-left rounded-2xl shadow-lg">
         <h2 className="text-2xl font-bold text-left text-white">Login</h2>
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={submitHandler}>
           <div>
             <label htmlFor="email" className="block text-sm text-gray-300">
               Email
             </label>
             <input
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               id="email"
               placeholder="Enter your email"
@@ -23,6 +42,7 @@ function Login() {
               Password
             </label>
             <input
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               id="password"
               placeholder="Enter your password"
